@@ -1,6 +1,7 @@
 package com.example.registrationform;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -12,7 +13,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.Calendar;
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
+
+    private EditText editTxtDateOfBirth;
+    private TextView txtDateOfBirth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +31,28 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        editTxtDateOfBirth = findViewById(R.id.edtTxtDateOfBirth);
+        txtDateOfBirth = findViewById(R.id.txtDateOfBirth);
+
+        editTxtDateOfBirth.setOnClickListener(v -> showDatePickerDialog());
+    }
+
+    private void showDatePickerDialog() {
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                (view, selectedYear, selectedMonth, selectedDay) -> {
+                    String selectedDate = String.format(Locale.getDefault(), "%02d/%02d/%d", selectedDay, selectedMonth + 1, selectedYear);
+                    editTxtDateOfBirth.setText(selectedDate);
+                },
+                year, month, day);
+
+        datePickerDialog.show();
     }
 
     public void onRegisterBtnClick(View view){
@@ -34,9 +63,11 @@ public class MainActivity extends AppCompatActivity {
         @SuppressLint("WrongViewCast") EditText editTxtFirstname = findViewById(R.id.edtTxtFirstName);
         @SuppressLint("WrongViewCast") EditText editTxtSecondName = findViewById(R.id.edtTxtSecondName);
         @SuppressLint("WrongViewCast") EditText editTxtEmail = findViewById(R.id.edtTxtEmail);
+        @SuppressLint("WrongViewCast") EditText editTxtDateOfBirth = findViewById(R.id.edtTxtDateOfBirth);
 
         txtFirstName.setText("First Name: " + editTxtFirstname.getText().toString());
         txtSecondName.setText("Last Name: " + editTxtSecondName.getText().toString());
         txtEmail.setText("Email: " + editTxtEmail.getText().toString());
+        txtDateOfBirth.setText("Date of Birth: " + editTxtDateOfBirth.getText().toString());
     }
 }
