@@ -8,48 +8,12 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/edtTxtSecondName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="Second Name"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="@+id/edtTxtFirstName"
-        app:layout_constraintStart_toStartOf="@+id/edtTxtFirstName"
-        app:layout_constraintTop_toBottomOf="@+id/edtTxtFirstName" />
-
-    <EditText
-        android:id="@+id/edtTxtEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="@+id/edtTxtSecondName"
-        app:layout_constraintStart_toStartOf="@+id/edtTxtSecondName"
-        app:layout_constraintTop_toBottomOf="@+id/edtTxtSecondName" />
-
-    <EditText
-        android:id="@+id/edtTxtDateOfBirth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="Date of Birth"
-        android:inputType="none"
-        android:focusable="false"
-        android:clickable="true"
-        app:layout_constraintEnd_toEndOf="@+id/edtTxtEmail"
-        app:layout_constraintStart_toStartOf="@+id/edtTxtEmail"
-        app:layout_constraintTop_toBottomOf="@+id/edtTxtEmail" />
-
-    <EditText
         android:id="@+id/edtTxtFirstName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="100dp"
+        android:layout_marginEnd="24dp"
         android:ems="10"
         android:hint="First Name"
         android:inputType="text"
@@ -57,55 +21,49 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnRegister"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/edtTxtDateOfBirth"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
-        android:onClick="onRegisterBtnClick"
-        android:text="Register"
-        app:layout_constraintEnd_toEndOf="@+id/edtTxtDateOfBirth"
-        app:layout_constraintStart_toStartOf="@+id/edtTxtDateOfBirth"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:ems="10"
+        android:hint="Date of Birth"
+        android:inputType="none"
+        android:focusable="false"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtTxtFirstName" />
+
+    <EditText
+        android:id="@+id/edtTxtEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtTxtDateOfBirth" />
 
-    <TextView
-        android:id="@+id/txtFirstName"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="90dp"
-        android:text="First Name"
-        app:layout_constraintEnd_toEndOf="@+id/btnRegister"
-        app:layout_constraintStart_toStartOf="@+id/btnRegister"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
-
-    <TextView
-        android:id="@+id/txtSecondName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Second Name"
-        app:layout_constraintEnd_toEndOf="@+id/txtFirstName"
-        app:layout_constraintStart_toStartOf="@+id/txtFirstName"
-        app:layout_constraintTop_toBottomOf="@+id/txtFirstName" />
-
-    <TextView
-        android:id="@+id/txtEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Email"
-        app:layout_constraintEnd_toEndOf="@+id/txtSecondName"
-        app:layout_constraintStart_toStartOf="@+id/txtSecondName"
-        app:layout_constraintTop_toBottomOf="@+id/txtSecondName" />
-
-    <TextView
-        android:id="@+id/txtDateOfBirth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Date of Birth"
-        app:layout_constraintEnd_toEndOf="@+id/txtEmail"
-        app:layout_constraintStart_toStartOf="@+id/txtEmail"
-        app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:onClick="onRegisterBtnClick"
+        android:text="Register"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtTxtEmail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

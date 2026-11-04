@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -17,7 +16,6 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -25,7 +23,6 @@ import java.util.TimeZone;
 public class MainActivity extends AppCompatActivity {
 
     private EditText editTxtDateOfBirth;
-    private TextView txtDateOfBirth;
     private long selectedDateInMillis = 0;
 
     @Override
@@ -40,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         editTxtDateOfBirth = findViewById(R.id.edtTxtDateOfBirth);
-        txtDateOfBirth = findViewById(R.id.txtDateOfBirth);
 
         editTxtDateOfBirth.setOnClickListener(v -> showMaterialDatePicker());
     }
@@ -66,18 +62,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onRegisterBtnClick(View view){
-        TextView txtFirstName = findViewById(R.id.txtFirstName);
-        TextView txtSecondName = findViewById(R.id.txtSecondName);
-        TextView txtEmail = findViewById(R.id.txtEmail);
-
         @SuppressLint("WrongViewCast") EditText editTxtFirstname = findViewById(R.id.edtTxtFirstName);
-        @SuppressLint("WrongViewCast") EditText editTxtSecondName = findViewById(R.id.edtTxtSecondName);
-        @SuppressLint("WrongViewCast") EditText editTxtEmail = findViewById(R.id.edtTxtEmail);
         @SuppressLint("WrongViewCast") EditText editTxtDateOfBirth = findViewById(R.id.edtTxtDateOfBirth);
+        @SuppressLint("WrongViewCast") EditText editTxtEmail = findViewById(R.id.edtTxtEmail);
 
-        txtFirstName.setText("First Name: " + editTxtFirstname.getText().toString());
-        txtSecondName.setText("Last Name: " + editTxtSecondName.getText().toString());
-        txtEmail.setText("Email: " + editTxtEmail.getText().toString());
-        txtDateOfBirth.setText("Date of Birth: " + editTxtDateOfBirth.getText().toString());
+        String firstName = editTxtFirstname.getText().toString().trim();
+        String dateOfBirth = editTxtDateOfBirth.getText().toString().trim();
+        String email = editTxtEmail.getText().toString().trim();
+
+        if (firstName.isEmpty() || dateOfBirth.isEmpty() || email.isEmpty()) {
+            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String message = "Registered:\n" + firstName + "\n" + dateOfBirth + "\n" + email;
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }
