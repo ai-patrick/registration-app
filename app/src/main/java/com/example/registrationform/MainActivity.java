@@ -3,6 +3,7 @@ package com.example.registrationform;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -12,9 +13,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.material.datepicker.MaterialDatePicker;
-import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -22,7 +20,8 @@ import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText editTxtDateOfBirth;
+    private CalendarView calendarView;
+    private EditText editTxtDateDisplay;
     private long selectedDateInMillis = 0;
 
     @Override
@@ -36,44 +35,41 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        editTxtDateOfBirth = findViewById(R.id.edtTxtDateOfBirth);
-
-        editTxtDateOfBirth.setOnClickListener(v -> showMaterialDatePicker());
-    }
-
-    private void showMaterialDatePicker() {
-        MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder.datePicker()
-                .setTitleText("Select Date of Birth")
-                .setSelection(selectedDateInMillis != 0 ? selectedDateInMillis : MaterialDatePicker.todayInUtcMilliseconds())
-                .build();
-
-        datePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Long>() {
-            @Override
-            public void onPositiveButtonClick(Long selection) {
-                selectedDateInMillis = selection;
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                sdf.setTimeZone(TimeZone.getDefault());
-                String formattedDate = sdf.format(new Date(selection));
-                editTxtDateOfBirth.setText(formattedDate);
-            }
+        calendarView = findViewById(R.id.calendarView);
+        
+        // Add a hidden EditText to display the selected date
+        editTxtDateDisplay = new EditText(this);
+        editTxtDateDisplay.setVisibility(View.GONE);
+        
+        // Set listener for date selection
+        calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
+            selectedDateInMillis = view.getDate();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            sdf.setTimeZone(TimeZone.getDefault());
+            String formattedDate = sdf.format(new Date(selectedDateInMillis));
+            // You could show this in a TextView if needed
         });
-
-        datePicker.show(getSupportFragmentManager(), "DATE_PICKER");
+        
+        // Set default to today
+        selectedDateInMillis = System.currentTimeMillis();
     }
 
     public void onRegisterBtnClick(View view){
         @SuppressLint("WrongViewCast") EditText editTxtFirstname = findViewById(R.id.edtTxtFirstName);
-        @SuppressLint("WrongViewCast") EditText editTxtDateOfBirth = findViewById(R.id.edtTxtDateOfBirth);
         @SuppressLint("WrongViewCast") EditText editTxtEmail = findViewById(R.id.edtTxtEmail);
 
         String firstName = editTxtFirstname.getText().toString().trim();
-        String dateOfBirth = editTxtDateOfBirth.getText().toString().trim();
         String email = editTxtEmail.getText().toString().trim();
 
-        if (firstName.isEmpty() || dateOfBirth.isEmpty() || email.isEmpty()) {
+        if (firstName.isEmpty() || email.isEmpty()) {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        // Format the selected date
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        sdf.setTimeZone(TimeZone.getDefault());
+        String dateOfBirth = sdf.format(new Date(selectedDateInMillis));
 
         String message = "Registered:\n" + firstName + "\n" + dateOfBirth + "\n" + email;
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
