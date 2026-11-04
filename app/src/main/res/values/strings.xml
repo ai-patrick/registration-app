@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">Registration form</string>
+    <string name="app_name">Form Input</string>
+    <string name="name_prompt">Name: </string>
+    <string name="DOB_prompt">Date of Birth:</string>
+    <string name="email_prompt">Email:</string>
+    <string name="next_command_prompt">Next</string>
+    <string name="Marital_status_prompt">Marital Status:</string>
+    <string name="exit_commandLable">Exit</string>
+    <string name="next_commandLable">Next</string>
 </resources>
